@@ -41,6 +41,11 @@ Interface API (Laravel) : http://localhost:8000
 Identifiant : admin@system.com
 Mot de passe : admin123
 
+Identifiant : test@dev.com
+Mot de passe : user123
+
+
+
 ## Maintenance et depannage
 
 En cas de probleme de synchronisation des donnees, il est recommande de reinitialiser les volumes Docker :
