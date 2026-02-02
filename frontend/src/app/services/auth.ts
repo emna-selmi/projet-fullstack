@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'; // <--- IMPORT MANQUANT CORRIGÉ
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   // On harmonise le nom : on garde 'apiUrl' pour correspondre à ta fonction register
-  private apiUrl = 'http://127.0.0.1:8000/api'; 
+  private apiUrl = 'http://localhost:8000/api';
 
   private http = inject(HttpClient); // Syntaxe moderne inject()
 
