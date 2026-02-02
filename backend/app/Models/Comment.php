@@ -10,7 +10,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $table = 'comments';
-    protected $primaryKey = 'id_comment'; // Vérifie si c'est bien id_comment ou id
+    protected $primaryKey = 'id_comment'; 
 
     protected $fillable = [
     'content',

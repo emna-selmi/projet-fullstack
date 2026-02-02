@@ -66,7 +66,7 @@ class TaskController extends Controller
         $task->id_user_assigne = $request->id_user;
         $task->save();
 
-        // FIX : Suppression de 'type' et 'target_id'
+        
         Notification::create([
             'user_id'   => $task->id_user_assigne,
             'title'     => 'Nouvelle tâche',

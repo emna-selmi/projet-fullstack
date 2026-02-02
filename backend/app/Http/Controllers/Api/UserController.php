@@ -33,7 +33,7 @@ class UserController extends Controller
     }
 
     /**
-     * US.6 — Créer un utilisateur (Admin only - Validation Point 5 & 7.1)
+     *  — Créer un utilisateur (Admin only)
      */
     public function store(Request $request)
     {
@@ -43,10 +43,10 @@ class UserController extends Controller
             return response()->json(['message' => 'Non autorisé'], 403);
         }
 
-        // VALIDATION : Unicité de l'email et longueur du password (Point 5 CDC)
+        // VALIDATION : Unicité de l'email et longueur du password 
         $validator = Validator::make($request->all(), [
             'nom'      => 'required|string|max:100',
-            'email'    => 'required|email|unique:users,email', // Test d'unicité (Section 7.1)
+            'email'    => 'required|email|unique:users,email', // Test d'uniciteee
             'password' => 'required|string|min:6',
             'role'     => 'required|in:Admin,Utilisateur'
         ]);
@@ -58,7 +58,7 @@ class UserController extends Controller
         $user = User::create([
             'nom' => $request->nom,
             'email' => $request->email,
-            'password' => Hash::make($request->password), // HACHAGE SECURISE (Section 7.1)
+            'password' => Hash::make($request->password), // HACHAGE SECURISEEE
             'role' => $request->role
         ]);
 
@@ -81,7 +81,7 @@ class UserController extends Controller
     }
 
     /**
-     * Modifier un utilisateur globalement (Admin only - Point 3 CDC)
+     * Modifier un utilisateur globalement (Admin only 
      */
     public function update(Request $request, $id)
     {

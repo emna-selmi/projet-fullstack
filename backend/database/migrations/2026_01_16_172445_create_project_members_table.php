@@ -11,11 +11,11 @@ return new class extends Migration
     Schema::create('project_members', function (Blueprint $table) {
     $table->id();
     
-    // Déclare les colonnes en UNSIGNED BIG INTEGER (obligatoire pour les clés étrangères)
+    
     $table->unsignedBigInteger('id_project');
     $table->unsignedBigInteger('id_user');
 
-    // Définit les relations explicitement
+    
     $table->foreign('id_project')
           ->references('id_project')
           ->on('projects')

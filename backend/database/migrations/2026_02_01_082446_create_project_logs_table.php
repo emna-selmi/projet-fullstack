@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
 {
     Schema::create('project_logs', function (Blueprint $table) {
-        $table->id(); // ID propre au log
+        $table->id(); 
         $table->unsignedBigInteger('project_id');
         $table->unsignedBigInteger('user_id');
         $table->string('action'); 

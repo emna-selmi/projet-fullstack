@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'etat'             => 'Terminé',
             'priorite'         => 'Haute',
             'id_project'       => $project->id_project,
-            'id_user_assigne'  => $admin->id_user // Utilise id_user_assigne comme dans ton fillable
+            'id_user_assigne'  => $admin->id_user 
         ]);
 
         Task::create([

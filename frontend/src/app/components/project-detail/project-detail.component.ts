@@ -344,12 +344,12 @@ public countUnassigned: number = 0;
     if (idFromUrl) {
       this.projectId = Number(idFromUrl);
       this.loadProjectData();
-      this.loadLogs(); // FIX: Charge les logs au démarrage
+      this.loadLogs(); 
     }
     this.refreshSubscription = interval(5000).subscribe(() => {
       if (this.projectId) {
         this.silentLoadTasks();
-        this.loadLogs(); // FIX: Refresh auto des logs aussi
+        this.loadLogs(); 
       }
     });
   }
@@ -360,7 +360,7 @@ public countUnassigned: number = 0;
 
   loadLogs() {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    // On utilise directement l'API pour éviter l'erreur sur le service
+    
       this.http.get<any[]>(`http://127.0.0.1:8000/api/projects/${this.projectId}/logs`, { headers }).subscribe({
       next: (data: any) => {
         if (data) {
@@ -376,7 +376,7 @@ public countUnassigned: number = 0;
   }
 
   private addToLogs(action: string, target: string) {
-    // Cette fonction reste pour l'effet immédiat en UI
+    
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const roleTag = (this.isAdmin || this.isProjectCreator) ? '⭐ ' : '';
     this.projectLogs.unshift({
@@ -480,7 +480,7 @@ public countUnassigned: number = 0;
       this.addToLogs(`a changé le statut en ${newStatus}`, task.title || task.titre || 'Tâche');
       this.notifService.show(`🚀 Statut mis à jour : ${newStatus}`);
       this.loadTasks();
-      this.loadLogs(); // FIX: Refresh logs from server after change
+      this.loadLogs(); 
     });
   }
 
@@ -492,7 +492,7 @@ public countUnassigned: number = 0;
       this.notifService.show("📢 Tâche créée");
       this.newTask = { titre: '', description: '', priorite: 'Moyenne', etat: 'Nouveau' };
       this.loadTasks();
-      this.loadLogs(); // FIX
+      this.loadLogs(); 
     });
   }
 
@@ -500,7 +500,7 @@ public countUnassigned: number = 0;
     this.projectService.addMember(this.projectId, this.newMember).subscribe(() => {
       this.notifService.show("👥 Membre ajouté");
       this.loadMembers();
-      this.loadLogs(); // FIX
+      this.loadLogs(); 
     });
   }
 
@@ -511,7 +511,7 @@ public countUnassigned: number = 0;
       this.addToLogs('a commenté la tâche', task.title || task.titre);
       task.newCommentText = '';
       this.silentLoadTasks();
-      this.loadLogs(); // FIX
+      this.loadLogs(); 
     });
   }
 
@@ -561,7 +561,7 @@ public countUnassigned: number = 0;
   assignMember(task: any, ev: any) {
     this.taskService.assignTask(task.id_task || task.id, ev.target.value).subscribe(() => {
       this.notifService.show("👤 Assignation mise à jour");
-      this.loadLogs(); // FIX
+      this.loadLogs(); 
     });
   }
 
@@ -581,7 +581,7 @@ public countUnassigned: number = 0;
     const h = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     this.http.delete(`http://127.0.0.1:8000/api/projects/${this.projectId}/members/${uid}`, { headers: h }).subscribe(() => {
         this.loadMembers();
-        this.loadLogs(); // FIX
+        this.loadLogs(); 
     });
   }
 

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs'; // <--- AJOUTEZ CETTE LIGNE (CRITIQUE)
+import { Observable, map } from 'rxjs'; 
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,10 @@ export class TaskService {
     });
   }
 
-  // Correction : Utilisez 'status' pour correspondre à votre erreur SQL Laravel
+  
   updateStatus(taskId: number, newStatus: string) {
   return this.http.put(`http://127.0.0.1:8000/api/tasks/${taskId}/status`, { 
-    etat: newStatus // Utilisez 'etat' pour correspondre à Laravel
+    etat: newStatus 
   }, { headers: this.getHeaders() });
 }
 
@@ -43,11 +43,11 @@ export class TaskService {
     );
   }
 
-  // Récupération des notifications
+  
   getNotifications(): Observable<any[]> {
     return this.http.get<any>(`${this.apiUrl}/notifications`, { headers: this.getHeaders() }).pipe(
       map(response => {
-        // Laravel renvoie souvent les données dans un objet 'data'
+        
         return Array.isArray(response) ? response : (response.data || []);
       })
     );

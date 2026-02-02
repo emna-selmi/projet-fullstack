@@ -62,7 +62,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function logs()
 {
-    // On précise id_user car ce n'est pas le nom par défaut 'id'
+    
     return $this->hasMany(ProjectLog::class, 'user_id', 'id_user');
 }
 

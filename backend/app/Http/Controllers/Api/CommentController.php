@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
-use App\Models\Task; // ✅ IMPORTANT
+use App\Models\Task; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,7 +22,7 @@ class CommentController extends Controller
         return $task->comments()->with('user')->get();
     }
 
-    public function store(Request $request, $taskId) // On reçoit taskId
+    public function store(Request $request, $taskId) 
 {
     $validator = Validator::make($request->all(), [
         'contenu' => 'required|string', // Validation du champ contenu

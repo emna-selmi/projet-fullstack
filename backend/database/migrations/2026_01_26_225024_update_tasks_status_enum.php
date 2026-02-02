@@ -12,8 +12,7 @@ return new class extends Migration
     public function up()
 {
     Schema::table('tasks', function (Blueprint $table) {
-        // On modifie l'enum pour inclure 'En attente'
-        // Note: Assurez-vous que le nom de la table est 'tasks' ou 'taches' selon votre DB
+        
         $table->enum('etat', ['Nouveau', 'En cours', 'En attente', 'Terminé'])
             ->default('Nouveau')
             ->change();

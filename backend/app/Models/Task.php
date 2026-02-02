@@ -22,7 +22,7 @@ class Task extends Model
     return $this->belongsTo(Project::class, 'id_project');
 }
 
-// Dans app/Models/Task.php
+
 
 public function user()
 {
@@ -41,18 +41,18 @@ public function user()
     }
 
     /**
-     * Relation avec les commentaires (Point 2.3 CDC)
+     * Relation avec les commentaires 
      */
     public function comments()
     {
         return $this->hasMany(Comment::class, 'id_task', 'id_task');
     }
 
-    /* ================= LOGIQUE MÉTIER (Règle 3.2 CDC) ================= */
+    
 
     public function updateState(string $newState, User $user)
 {
-    $currentState = $this->etat; // On utilise 'etat'
+    $currentState = $this->etat; 
 
     // Si l'état ne change pas, on ne fait rien
     if ($currentState === $newState) return;

@@ -160,16 +160,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.isAdmin() || (currentUserId > 0 && currentUserId === creatorId);
   }
 
-  // Dans dashboard.component.ts
+  
 loadNotifs() {
-  // On arrête d'essayer d'appeler /api/admin/notifications-all
-  // On utilise uniquement le service de base qui, lui, fonctionne
+  
   this.notifService.getNotifications().subscribe({
     next: (data) => {
       this.notifications.set(data);
     },
     error: (err) => {
-      // Si même cette route échoue, on affiche une erreur propre
+      
       console.warn("Les notifications ne sont pas accessibles pour le moment.");
     }
   });

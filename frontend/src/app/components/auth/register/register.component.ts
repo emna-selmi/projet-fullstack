@@ -81,12 +81,12 @@ export class RegisterComponent {
     return;
   }
 
-  // 2. Préparation des données pour Laravel (Mapping)
+  // 2. Préparation des données pour Laravel 
   const dataForLaravel = {
-    name: this.user.nom,       // On transforme 'nom' en 'name'
+    name: this.user.nom,       
     email: this.user.email,
     password: this.user.password,
-    password_confirmation: this.user.password // Important si Laravel a la règle 'confirmed'
+    password_confirmation: this.user.password 
   };
 
   // 3. Appel à l'API

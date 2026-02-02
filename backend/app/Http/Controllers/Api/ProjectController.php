@@ -217,9 +217,9 @@ public function postComment(Request $request, $id_project)
 
     public function getLogs($id)
 {
-    // On s'assure que project_id correspond bien au nom de ta colonne en DB
+    
     $logs = \App\Models\ProjectLog::where('project_id', $id)
-        ->with('user:id_user,nom') // Charge le nom de celui qui a fait l'action
+        ->with('user:id_user,nom') 
         ->orderBy('created_at', 'desc')
         ->get();
 
@@ -246,12 +246,12 @@ public function postComment(Request $request, $id_project)
     return response()->json(['message' => 'Projet supprimé avec succès']);
 }
 
-// Dans ProjectController.php
+
 public function getActivities($id)
 {
     // On récupère les tâches récentes comme "activités" pour éviter de créer une nouvelle table
     return \App\Models\Task::where('id_project', $id)
-        ->with('user') // Assurez-vous d'avoir la relation user() dans votre modèle Task
+        ->with('user') 
         ->orderBy('updated_at', 'desc')
         ->limit(10)
         ->get()

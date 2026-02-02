@@ -1,12 +1,12 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router'; // Ajout de l'import
+import { Router } from '@angular/router'; 
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
   private http = inject(HttpClient);
-  private router = inject(Router); // Injecter le Router ici
+  private router = inject(Router); 
   private apiUrl = 'http://127.0.0.1:8000/api/notifications';
 
   toasts = signal<{ id: number; msg: string; type: string }[]>([]);
@@ -15,17 +15,16 @@ export class NotificationService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  // LA MÉTHODE À AJOUTER
-  // notification.service.ts
+  
 goToNotification(notif: any) {
   this.http.put(`${this.apiUrl}/${notif.id}/read`, {}).subscribe({
     next: () => {
-      notif.is_read = 1; // Le badge du dashboard va baisser grâce à ça !
+      notif.is_read = 1; 
       
       if (notif.type === 'task' || notif.type === 'tâche') {
-          // Utilise l'ID présent dans la notification
+          
           const id = notif.target_id || notif.id_task;
-          this.router.navigate(['/tasks', id]); // Vérifie ton app.routes.ts !
+          this.router.navigate(['/tasks', id]); 
       } else {
           this.router.navigate(['/project', notif.target_id]);
       }
