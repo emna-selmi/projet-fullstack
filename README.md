@@ -1,37 +1,51 @@
-# Système de Gestion de Projets Fullstack
+# Systeme de Gestion de Projets Fullstack
 
-Ce projet est une application complète de gestion de tâches et de projets utilisant **Laravel** (Backend) et **Angular** (Frontend), le tout orchestré par **Docker**.
+Ce projet est une application de gestion de projets et de taches developpee avec une architecture decouplee. Le backend est propulse par le framework Laravel et le frontend par Angular. L'ensemble de l'infrastructure est virtualise a l'aide de Docker pour garantir une coherence entre les environnements de developpement.
 
-##  Fonctionnalités
-- Gestion complète (CRUD) des projets et des tâches.
-- Système d'authentification sécurisé.
-- Architecture micro-services avec Docker Compose.
+## Architecture Technique
 
-##  Installation et Lancement
+Le projet repose sur trois services principaux orchestres par Docker Compose :
+1. Un serveur web Apache avec PHP 8.2 pour l'API Laravel.
+2. Un serveur de base de données MySQL 8.0.
+3. Un serveur de developpement Node.js pour l'application Angular.
 
-### Prérequis
-- **Docker Desktop** installé et démarré.
+## Installation et Configuration
 
-### Étapes pour lancer le projet
-1. **Cloner le projet :**
-   ```bash
-   git clone https://github.com/emna-selmi/projet-fullstack.git
-   cd projet-fullstack
-   ```
+### Prerequis
+L'installation de Docker Desktop est imperative. Le moteur Docker doit etre actif avant de proceder aux etapes suivantes.
 
-2. **Lancer les conteneurs :**
-   ```bash
-   docker-compose up -d --build
-   ```
+### Procedure de deploiement
 
-3. **Initialiser la base de données :**
-   ```bash
-   docker exec -it laravel_app php artisan migrate --seed
-   ```
+1. Recuperation du code source :
+git clone https://github.com/emna-selmi/projet-fullstack.git
+cd projet-fullstack
 
-4. **Accès :**
-   - **Frontend :** http://localhost:4200
-   - **Backend :** http://localhost:8000
+2. Configuration des variables d'environnement :
+cp backend/.env.example backend/.env
 
----
-*Projet réalisé par Emna Selmi.*
+3. Construction et demarrage des conteneurs :
+docker-compose up -d --build
+
+4. Initialisation de l'application :
+docker-compose exec backend composer install
+docker-compose exec backend php artisan key:generate
+docker-compose exec backend php artisan migrate:fresh --seed
+
+## Acces a l'application
+
+Interface utilisateur (Angular) : http://localhost:4200
+Interface API (Laravel) : http://localhost:8000
+
+## Identifiants de test
+
+Identifiant : admin@system.com
+Mot de passe : admin123
+
+## Maintenance et depannage
+
+En cas de probleme de synchronisation des donnees, il est recommande de reinitialiser les volumes Docker :
+docker-compose down -v
+docker-compose up -d
+docker-compose exec backend php artisan migrate:fresh --seed
+
+Realise par Emna Selmi.
