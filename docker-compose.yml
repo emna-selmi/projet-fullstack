@@ -1,0 +1,48 @@
+services:
+  # --- LE CACHE (Redis) ---
+  redis:
+    image: redis:alpine
+    container_name: redis_cache
+    restart: always
+    ports:
+      - "6379:6379"
+  # --- LA BASE DE DONNÉES (MySQL) ---
+  db:
+    image: mysql:8.0
+    container_name: project_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: project_management
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # --- LE BACKEND (Laravel) ---
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - db
+
+  # --- LE FRONTEND (Angular) ---
+  frontend:
+    image: node:22
+    container_name: angular_app
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "4200:4200"
+    # Cette commande installe les dépendances et lance le serveur au démarrage
+    command: sh -c "npm install && npm start -- --host 0.0.0.0"
+
+volumes:
+  db_data:
